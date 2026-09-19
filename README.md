@@ -47,9 +47,17 @@ The `Deploy to GitHub Pages` workflow publishes the contents of `site/`. It runs
 on every push to `main`, and can also be started manually from the **Actions**
 tab via **Run workflow**.
 
-The workflow enables Pages itself (`enablement: true` on `configure-pages`), so
-no manual setup is required. The published site is served from
-<https://shekath.github.io/Organisation/>.
+**One-time setup is required before the first run can succeed:**
+
+1. Go to **Settings → Pages**.
+2. Under **Build and deployment**, set **Source** to **GitHub Actions**.
+
+Until that is done, the `configure-pages` step fails with *"Get Pages site
+failed"*, because the repository has no Pages site to deploy to. The workflow
+token is not permitted to create one on its own, so this step cannot be
+automated.
+
+Once enabled, the site is served from <https://shekath.github.io/Organisation/>.
 
 ## Keyboard shortcuts
 

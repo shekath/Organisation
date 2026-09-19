@@ -25,11 +25,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # enablement: turns Pages on for the repository if it is not already,
-      # so a fresh clone of this repo deploys without manual setup.
+      # Requires Pages to be enabled with "GitHub Actions" as the source;
+      # the workflow token cannot create the Pages site itself.
       - uses: actions/configure-pages@v5
-        with:
-          enablement: true
 
       - name: Upload site
         uses: actions/upload-pages-artifact@v3
