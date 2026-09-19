@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Responsive multi-tenant workforce and global project governance platform prototype" />
+  <title>OrbitGov — Workforce & Project Governance</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="Primary navigation">
+      <div class="brand-wrap">
+        <div class="brand-mark" aria-hidden="true">OG</div>
+        <div class="brand-copy">
+          <strong>OrbitGov</strong>
+          <span>Enterprise Command</span>
+        </div>
+        <button class="icon-btn sidebar-toggle" id="sidebarToggle" aria-label="Collapse sidebar">←</button>
+      </div>
+
+      <nav class="nav-list">
+        <button class="nav-item active" data-view="dashboard"><span>◫</span><b>Dashboard</b></button>
+        <button class="nav-item" data-view="regions"><span>◎</span><b>Regions</b></button>
+        <button class="nav-item" data-view="projects"><span>▦</span><b>Projects</b></button>
+        <button class="nav-item" data-view="workforce"><span>♙</span><b>Workforce</b></button>
+        <button class="nav-item" data-view="kanban"><span>≋</span><b>Kanban</b></button>
+        <button class="nav-item" data-view="roadmap"><span>↔</span><b>Roadmap</b></button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button class="nav-item" id="settingsBtn"><span>⚙</span><b>Settings</b></button>
+        <div class="health-card">
+          <div class="health-dot"></div>
+          <div><strong>System healthy</strong><span>All services operational</span></div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="main-shell">
+      <header class="topbar">
+        <div class="mobile-brand">
+          <div class="brand-mark">OG</div><strong>OrbitGov</strong>
+        </div>
+        <button class="icon-btn mobile-menu" id="mobileMenu" aria-label="Open menu">☰</button>
+        <div class="search-wrap">
+          <span>⌕</span>
+          <input id="globalSearch" type="search" placeholder="Search projects, employees, regions…" aria-label="Global search" />
+          <kbd>⌘ K</kbd>
+        </div>
+        <div class="topbar-actions">
+          <div class="role-switcher">
+            <label for="roleSelect">Role</label>
+            <select id="roleSelect">
+              <option>Admin</option>
+              <option>Lead Manager</option>
+              <option>Manager</option>
+            </select>
+          </div>
+          <button class="icon-btn" id="themeToggle" aria-label="Toggle theme">◐</button>
+          <button class="icon-btn notification-btn" aria-label="Notifications">♢<span class="badge">3</span></button>
+          <button class="profile-btn" id="profileBtn">
+            <span class="avatar">SA</span>
+            <span class="profile-copy"><strong>Shaik Ali</strong><small id="profileRole">Admin</small></span>
+            <span>⌄</span>
+          </button>
+        </div>
+      </header>
+
+      <main class="content" id="mainContent">
+        <section class="page-head">
+          <div>
+            <div class="eyebrow">GLOBAL OPERATIONS</div>
+            <h1 id="pageTitle">Executive Command Center</h1>
+            <p id="pageSubtitle">Monitor global delivery, workforce health and project risk in one place.</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn secondary" id="exportBtn">Export report</button>
+            <button class="btn primary admin-only" id="publishProjectBtn">＋ Publish project</button>
+          </div>
+        </section>
+
+        <section class="view active" id="dashboardView" data-view-section="dashboard">
+          <div class="alert-banner" id="contextBanner">
+            <div class="alert-icon">✦</div>
+            <div><strong>3 delivery risks need attention</strong><span>Two projects are above 90% occupancy and one milestone is overdue.</span></div>
+            <button class="text-btn" data-jump="projects">Review now →</button>
+          </div>
+
+          <div class="kpi-grid">
+            <article class="kpi-card"><div class="kpi-head"><span>Total Projects</span><span class="icon-chip">▦</span></div><div class="kpi-value">48</div><div class="kpi-foot positive">↗ 8.2% <span>vs last month</span></div></article>
+            <article class="kpi-card"><div class="kpi-head"><span>Total Employees</span><span class="icon-chip">♙</span></div><div class="kpi-value">1,284</div><div class="kpi-foot positive">↗ 4.1% <span>headcount growth</span></div></article>
+            <article class="kpi-card"><div class="kpi-head"><span>Billable Utilization</span><span class="icon-chip">◴</span></div><div class="kpi-value">82.6%</div><div class="kpi-foot warning">↘ 1.7% <span>capacity shift</span></div></article>
+            <article class="kpi-card"><div class="kpi-head"><span>At-risk Projects</span><span class="icon-chip danger-chip">!</span></div><div class="kpi-value">5</div><div class="kpi-foot danger">↑ 2 <span>since last week</span></div></article>
+          </div>
+
+          <div class="dashboard-grid">
+            <article class="panel region-panel span-2">
+              <div class="panel-head"><div><h2>Regional command center</h2><p>Live delivery and workforce occupancy by hub</p></div><button class="text-btn" data-jump="regions">View all regions →</button></div>
+              <div class="country-grid" id="countryGrid"></div>
+            </article>
+
+            <article class="panel status-panel">
+              <div class="panel-head"><div><h2>Project status</h2><p>Portfolio distribution</p></div><button class="icon-btn mini">⋯</button></div>
+              <div class="donut-wrap">
+                <div class="donut" aria-label="Project status chart"><div><strong>48</strong><span>projects</span></div></div>
+                <div class="legend"><span><i class="dot active-dot"></i>Active <b>29</b></span><span><i class="dot complete-dot"></i>Completed <b>14</b></span><span><i class="dot overdue-dot"></i>Overdue <b>5</b></span></div>
+              </div>
+            </article>
+
+            <article class="panel utilization-panel span-2">
+              <div class="panel-head"><div><h2>Resource allocation trend</h2><p>Billable workforce utilization over 8 weeks</p></div><select class="compact-select"><option>Last 8 weeks</option><option>Last 12 weeks</option></select></div>
+              <svg class="area-chart" viewBox="0 0 760 230" role="img" aria-label="Resource allocation trend">
+                <defs><linearGradient id="grad" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="currentColor" stop-opacity=".26"/><stop offset="1" stop-color="currentColor" stop-opacity="0"/></linearGradient></defs>
+                <g class="grid-lines"><line x1="30" y1="40" x2="735" y2="40"/><line x1="30" y1="90" x2="735" y2="90"/><line x1="30" y1="140" x2="735" y2="140"/><line x1="30" y1="190" x2="735" y2="190"/></g>
+                <path class="area" d="M30,168 C110,150 120,120 200,132 S320,104 390,110 S500,70 565,88 S655,58 735,66 L735,205 L30,205 Z"/>
+                <path class="line" d="M30,168 C110,150 120,120 200,132 S320,104 390,110 S500,70 565,88 S655,58 735,66"/>
+                <g class="chart-labels"><text x="30" y="224">W1</text><text x="125" y="224">W2</text><text x="220" y="224">W3</text><text x="315" y="224">W4</text><text x="410" y="224">W5</text><text x="505" y="224">W6</text><text x="600" y="224">W7</text><text x="695" y="224">W8</text></g>
+              </svg>
+            </article>
+
+            <article class="panel activity-panel">
+              <div class="panel-head"><div><h2>Live activity</h2><p>Latest operational changes</p></div></div>
+              <div class="activity-list">
+                <div class="activity"><span class="activity-icon">↔</span><div><strong>Employee reassigned</strong><p>Maya R. moved from Atlas to Nova</p><small>6 min ago</small></div></div>
+                <div class="activity"><span class="activity-icon">✓</span><div><strong>Milestone completed</strong><p>CareFlow Sprint 12 signed off</p><small>18 min ago</small></div></div>
+                <div class="activity"><span class="activity-icon">＋</span><div><strong>Project published</strong><p>Project Orion · USA region</p><small>42 min ago</small></div></div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="view" id="regionsView" data-view-section="regions">
+          <article class="panel">
+            <div class="panel-head"><div><h2>Regional portfolio</h2><p>Country-level projects, occupancy and delivery health</p></div><div class="segmented"><button class="active">Cards</button><button>Table</button></div></div>
+            <div class="country-grid expanded" id="countryGridLarge"></div>
+          </article>
+        </section>
+
+        <section class="view" id="projectsView" data-view-section="projects">
+          <article class="panel">
+            <div class="panel-head"><div><h2>Projects</h2><p>Manage delivery portfolios and assignments</p></div><div class="table-actions"><input class="mini-search" placeholder="Filter projects"/><select class="compact-select"><option>All regions</option><option>India</option><option>USA</option><option>UK</option></select></div></div>
+            <div class="table-wrap"><table><thead><tr><th>Project</th><th>Region</th><th>Lead</th><th>Status</th><th>Occupancy</th><th>Milestone</th><th></th></tr></thead><tbody id="projectTable"></tbody></table></div>
+          </article>
+        </section>
+
+        <section class="view" id="workforceView" data-view-section="workforce">
+          <div class="workforce-grid">
+            <article class="panel">
+              <div class="panel-head"><div><h2>Workforce availability</h2><p>Team allocation by functional group</p></div><button class="btn secondary admin-only">＋ Add employee</button></div>
+              <div class="capacity-list" id="capacityList"></div>
+            </article>
+            <article class="panel admin-only">
+              <div class="panel-head"><div><h2>Bulk user ingest</h2><p>Upload the 7-column workforce template</p></div></div>
+              <label class="upload-zone" id="uploadZone"><input type="file" id="excelUpload" accept=".xlsx,.xls,.csv" hidden><span class="upload-icon">⇧</span><strong>Drop Excel template here</strong><small>Employee Name, Emp ID, Designation, Email, Country, City, Phone</small><button type="button" class="btn secondary" id="browseBtn">Browse file</button></label>
+              <div class="validation-box" id="validationBox"><span>✓</span><div><strong>Pre-flight validation ready</strong><p>Duplicates and invalid columns will be flagged before import.</p></div></div>
+            </article>
+          </div>
+          <article class="panel org-panel">
+            <div class="panel-head"><div><h2>Interactive org chart</h2><p>Drag resource cards to preview reassignment</p></div><div class="legend-inline"><span><i class="dot available"></i>Available</span><span><i class="dot busy"></i>Busy</span><span><i class="dot over"></i>Overallocated</span></div></div>
+            <div class="org-chart">
+              <div class="org-node root"><span class="avatar blue">AR</span><div><strong>Anika Rao</strong><small>Lead Manager · India</small></div></div>
+              <div class="org-children">
+                <div class="org-branch"><div class="org-node"><span class="avatar">RK</span><div><strong>Rahul K.</strong><small>Manager · Platform</small></div><span class="load good">72%</span></div><div class="people-stack"><span>ME · UX</span><span>SN · Dev</span><span>VK · QA</span></div></div>
+                <div class="org-branch"><div class="org-node"><span class="avatar">JM</span><div><strong>John M.</strong><small>Manager · Data</small></div><span class="load warn">88%</span></div><div class="people-stack"><span>AM · Dev</span><span>PS · Data</span><span>NK · QA</span></div></div>
+                <div class="org-branch"><div class="org-node"><span class="avatar">SP</span><div><strong>Sara P.</strong><small>Manager · AI</small></div><span class="load danger">104%</span></div><div class="people-stack"><span>DR · ML</span><span>AT · Dev</span><span>MK · UX</span></div></div>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <section class="view" id="kanbanView" data-view-section="kanban">
+          <div class="kanban-toolbar"><div class="segmented" id="kanbanTabs"><button class="active">All</button><button>Backlog</button><button>In Progress</button><button>Review</button><button>QA</button><button>Done</button></div><button class="btn primary">＋ Create task</button></div>
+          <div class="kanban-board" id="kanbanBoard"></div>
+        </section>
+
+        <section class="view" id="roadmapView" data-view-section="roadmap">
+          <article class="panel roadmap-panel">
+            <div class="panel-head"><div><h2>Interactive roadmap</h2><p>Sprint milestones, dependencies and delivery timing</p></div><div class="table-actions"><button class="btn secondary">Today</button><select class="compact-select"><option>Quarter view</option><option>Month view</option></select></div></div>
+            <div class="gantt-wrap">
+              <div class="gantt-grid" id="ganttGrid"></div>
+            </div>
+          </article>
+        </section>
+      </main>
+
+      <nav class="mobile-bottom-nav" aria-label="Mobile navigation">
+        <button class="active" data-view="dashboard"><span>◫</span><small>Home</small></button>
+        <button data-view="projects"><span>▦</span><small>Projects</small></button>
+        <button data-view="kanban"><span>≋</span><small>Kanban</small></button>
+        <button data-view="workforce"><span>♙</span><small>Team</small></button>
+        <button data-view="roadmap"><span>↔</span><small>Roadmap</small></button>
+      </nav>
+    </div>
+  </div>
+
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+  <aside class="detail-drawer" id="regionDrawer" aria-hidden="true">
+    <div class="drawer-head"><div><span class="eyebrow">REGION DETAIL</span><h2 id="drawerTitle">India</h2></div><button class="icon-btn" id="closeDrawer">✕</button></div>
+    <div id="drawerContent"></div>
+  </aside>
+
+  <div class="modal-backdrop" id="modalBackdrop"></div>
+  <section class="modal" id="projectModal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="projectModalTitle">
+    <div class="modal-head"><div><span class="eyebrow">PROJECT INGEST</span><h2 id="projectModalTitle">Publish new project</h2></div><button class="icon-btn" data-close-modal>✕</button></div>
+    <form id="projectForm">
+      <div class="form-grid">
+        <label>Project name<input required name="name" placeholder="e.g. Project Aurora"/></label>
+        <label>Target region<select required name="region"><option>India</option><option>United States</option><option>United Kingdom</option><option>Australia</option></select></label>
+        <label class="span-2">Scope<textarea required name="scope" rows="4" placeholder="Describe objectives, outcomes and constraints"></textarea></label>
+        <label>Lead Manager<select><option>Anika Rao</option><option>David Smith</option><option>Sophie Turner</option></select></label>
+        <label>Manager<select><option>Rahul K.</option><option>John M.</option><option>Sara P.</option></select></label>
+        <label class="span-2 attachment-zone">Attachments<input type="file" multiple/><span>⇧ Drop PDF, DOCX, ZIP, CAD or any project file</span></label>
+      </div>
+      <div class="modal-actions"><button type="button" class="btn secondary" data-close-modal>Cancel</button><button class="btn primary" type="submit">Publish project</button></div>
+    </form>
+  </section>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
