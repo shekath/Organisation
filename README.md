@@ -43,16 +43,13 @@ Opening `site/index.html` directly from the filesystem also works.
 
 ## Deploying
 
-The `Deploy to GitHub Pages` workflow publishes the contents of `site/`.
+The `Deploy to GitHub Pages` workflow publishes the contents of `site/`. It runs
+on every push to `main`, and can also be started manually from the **Actions**
+tab via **Run workflow**.
 
-One-time setup, needed before the first successful run:
-
-1. Go to **Settings → Pages**.
-2. Under **Build and deployment**, set **Source** to **GitHub Actions**.
-
-The workflow then runs on every push to `main`, and can also be started
-manually from the **Actions** tab via **Run workflow**. Until Pages is enabled
-the deploy step will fail, since the repository has no Pages site to publish to.
+The workflow enables Pages itself (`enablement: true` on `configure-pages`), so
+no manual setup is required. The published site is served from
+<https://shekath.github.io/Organisation/>.
 
 ## Keyboard shortcuts
 
